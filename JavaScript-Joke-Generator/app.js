@@ -6,6 +6,8 @@ const jokes = [
   "Why was the broom late? It swept in traffic!",
 ];
 
+let lastJokeIndex = -1;
+
 function delay (ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -14,7 +16,12 @@ async function tellJoke () {
     console.log("Thinking of a joke...");
     await delay(5000);
 
-    const randomIndex = Math.floor(Math.random() * jokes.length);
+    let randomIndex;
+    do {
+        randomIndex = Math.floor(Math.random() * jokes.length);
+    } while (randomIndex === lastJokeIndex);
+
+    lastJokeIndex = randomIndex
     console.log(jokes[randomIndex]);
 }
 
